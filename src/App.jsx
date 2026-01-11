@@ -13,22 +13,41 @@ function App() {
     // Initialize smooth scrolling
     const lenis = new Lenis({
       duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponential easing for "Antigravity" feel
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: true,
-      touchMultiplier: 2,
+      touchMultiplier: 1.5, // Reduced slightly for better control
+      wheelMultiplier: 1,
+      infinite: false,
     });
 
+    let rafId;
     function raf(time) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
+
+    // Track scrolling state for potential GPU optimizations
+    let scrollTimeout;
+    const onScroll = () => {
+      if (!document.body.classList.contains('is-scrolling')) {
+        document.body.classList.add('is-scrolling');
+      }
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        document.body.classList.remove('is-scrolling');
+      }, 150); // Small delay to catch continuous scrolls
+    };
+
+    lenis.on('scroll', onScroll);
 
     return () => {
+      cancelAnimationFrame(rafId);
       lenis.destroy();
+      clearTimeout(scrollTimeout);
     };
   }, []);
 
