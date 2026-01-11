@@ -17,7 +17,7 @@ import apacmedLogo from '../assets/logos/apacmed.png';
 const brands = [
     { name: "Medtools.id", url: "https://www.medtools.id", logo: medtoolsLogo },
     { name: "dr soap", url: "https://dr-soap.com/", logo: drSoapLogo },
-    { name: "Bertumboost", url: "https://www.phraso.ai", logo: bertumboostLogo },
+    { name: "Bertumboost", url: "https://bertumboost.com", logo: bertumboostLogo },
     { name: "MOHC", url: "https://medika-ohc.co.id/", logo: mohcLogo },
     { name: "Medimpact.co", url: "https://www.instagram.com/medimpact.co/", logo: medimpactLogo },
     { name: "IDKI", url: "https://idki.org/", logo: idkiLogo },
@@ -78,8 +78,8 @@ export default function TrustedBy() {
             </div>
 
             {/* Gradient Masks for Fade Effect */}
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-navy-900 to-transparent z-10"></div>
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-navy-900 to-transparent z-10"></div>
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-navy-900 to-transparent z-10 opacity-50 md:opacity-100"></div>
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-navy-900 to-transparent z-10 opacity-50 md:opacity-100"></div>
         </Section>
     )
 }
