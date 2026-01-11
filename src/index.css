@@ -9,6 +9,7 @@
 
   --animate-fade-in: fade-in 0.5s ease-in-out;
   --animate-marquee: marquee 60s linear infinite;
+  --animate-marquee-reverse: marquee-reverse 60s linear infinite;
 
   @keyframes marquee {
     from {
@@ -17,6 +18,16 @@
 
     to {
       transform: translateX(-100%);
+    }
+  }
+
+  @keyframes marquee-reverse {
+    from {
+      transform: translateX(-100%);
+    }
+
+    to {
+      transform: translateX(0);
     }
   }
 }
@@ -54,4 +65,39 @@ html.lenis body {
 
 .lenis.lenis-scrolling iframe {
   pointer-events: none;
+}
+
+/* Scroll Performance Optimizations */
+.is-scrolling * {
+  pointer-events: none !important;
+  /* Disable hover/clicks during scroll */
+}
+
+/* Keep essential elements interactive */
+.is-scrolling html,
+.is-scrolling body,
+.is-scrolling #root,
+.is-scrolling main {
+  pointer-events: auto !important;
+}
+
+/* Reduce GPU load during active scroll */
+.is-scrolling .backdrop-blur-md,
+.is-scrolling .backdrop-blur-lg {
+  backdrop-filter: blur(4px) !important;
+  /* Lower blur depth during scroll */
+  transition: backdrop-filter 0.3s ease;
+}
+
+/* Lower vignette intensity during scroll for smoother frame rates */
+.is-scrolling [class*="bg-gradient-to-r from-navy-900"],
+.is-scrolling [class*="bg-gradient-to-l from-navy-900"] {
+  opacity: 0.3 !important;
+  transition: opacity 0.3s ease;
+}
+
+/* Hardware acceleration hints */
+.will-change-gpu {
+  will-change: transform, opacity;
+  transform: translateZ(0);
 }
