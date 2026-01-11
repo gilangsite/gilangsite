@@ -1,17 +1,23 @@
-import { motion, AnimatePresence, useScroll } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
 export default function Navbar() {
-    const { scrollY } = useScroll();
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     useEffect(() => {
-        return scrollY.onChange((latest) => {
-            setIsScrolled(latest > 50);
-        });
-    }, [scrollY]);
+        const handleScroll = () => {
+            const threshold = 50;
+            const scrolled = window.scrollY > threshold;
+            if (scrolled !== isScrolled) {
+                setIsScrolled(scrolled);
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [isScrolled]);
 
     // Handle menu item click: close menu
     const handleItemClick = () => {
@@ -23,8 +29,8 @@ export default function Navbar() {
     return (
         <motion.nav
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out border-b ${isScrolled || isMenuOpen
-                    ? 'bg-navy-900/80 backdrop-blur-md border-white/10'
-                    : 'bg-transparent border-transparent'
+                ? 'bg-navy-900/80 backdrop-blur-md border-white/10'
+                : 'bg-transparent border-transparent'
                 }`}
         >
             <div className="max-w-7xl mx-auto px-8 md:px-12 h-20 flex items-center justify-between">
