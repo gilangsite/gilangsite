@@ -12,18 +12,21 @@ export default function Hero() {
     const y = useTransform(scrollYProgress, [0, 1], ["0%", "50%"]);
     const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
+    // Check for mobile for simplified animations
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
     return (
-        <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+        <section ref={ref} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 will-change-transform">
 
             {/* Background Elements */}
             <div className="absolute inset-0 z-0 select-none pointer-events-none">
-                <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-indigo-600/20 rounded-full blur-[120px] opacity-70" />
-                <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-purple-600/10 rounded-full blur-[120px] opacity-60" />
+                <div className="absolute top-[-20%] left-[-10%] w-[50%] h-[50%] bg-indigo-600/20 rounded-full blur-[120px] opacity-70 will-change-[transform,opacity]" />
+                <div className="absolute bottom-[-20%] right-[-10%] w-[50%] h-[50%] bg-purple-600/10 rounded-full blur-[120px] opacity-60 will-change-[transform,opacity]" />
             </div>
 
             <motion.div
-                style={{ y, opacity }}
-                className="relative z-10 max-w-5xl mx-auto px-8 text-center"
+                style={!isMobile ? { y, opacity } : {}}
+                className="relative z-10 max-w-5xl mx-auto px-8 text-center will-change-[transform,opacity]"
             >
                 <motion.h2
                     initial={{ opacity: 0, y: 20 }}
