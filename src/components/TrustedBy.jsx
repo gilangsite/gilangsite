@@ -36,50 +36,102 @@ export default function TrustedBy() {
                 I've been working with
             </h3>
 
-            <div className="relative flex overflow-x-hidden group">
-                <div className="flex animate-marquee group-hover:[animation-play-state:paused] min-w-full shrink-0 items-center justify-start gap-16 md:gap-32 pr-16 md:pr-32">
-                    {brands.map((brand, index) => (
-                        <a
-                            key={`${brand.name}-${index}`}
-                            href={brand.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="relative block w-48 h-48 md:w-64 md:h-64 transition-all duration-500 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]"
-                            aria-label={`Visit ${brand.name}`}
-                        >
-                            <img
-                                src={brand.logo}
-                                alt={brand.name}
-                                className="w-full h-full object-contain object-center"
-                                loading="lazy"
-                            />
-                        </a>
-                    ))}
+            <div className="relative space-y-12">
+                {/* Top Line: Right to Left */}
+                <div className="relative flex overflow-x-hidden group">
+                    <div className="flex animate-marquee group-hover:[animation-play-state:paused] min-w-full shrink-0 items-center justify-start gap-16 md:gap-32 pr-16 md:pr-32">
+                        {brands.map((brand, index) => (
+                            <a
+                                key={`${brand.name}-t1-${index}`}
+                                href={brand.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="relative block w-48 h-48 md:w-64 md:h-64 transition-all duration-500 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]"
+                                aria-label={`Visit ${brand.name}`}
+                            >
+                                <img
+                                    src={brand.logo}
+                                    alt={brand.name}
+                                    className="w-full h-full object-contain object-center"
+                                    loading="lazy"
+                                />
+                            </a>
+                        ))}
+                    </div>
+                    {/* Duplicate for seamless loop */}
+                    <div aria-hidden="true" className="flex animate-marquee group-hover:[animation-play-state:paused] min-w-full shrink-0 items-center justify-start gap-16 md:gap-32 pr-16 md:pr-32">
+                        {brands.map((brand, index) => (
+                            <a
+                                key={`${brand.name}-t2-${index}`}
+                                href={brand.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="relative block w-48 h-48 md:w-64 md:h-64 transition-all duration-500 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]"
+                            >
+                                <img
+                                    src={brand.logo}
+                                    alt={brand.name}
+                                    className="w-full h-full object-contain object-center"
+                                    loading="lazy"
+                                />
+                            </a>
+                        ))}
+                    </div>
                 </div>
-                {/* Duplicate for seamless loop */}
-                <div aria-hidden="true" className="flex animate-marquee group-hover:[animation-play-state:paused] min-w-full shrink-0 items-center justify-start gap-16 md:gap-32 pr-16 md:pr-32">
-                    {brands.map((brand, index) => (
-                        <a
-                            key={`${brand.name}-duplicate-${index}`}
-                            href={brand.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="relative block w-48 h-48 md:w-64 md:h-64 transition-all duration-500 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]"
-                        >
-                            <img
-                                src={brand.logo}
-                                alt={brand.name}
-                                className="w-full h-full object-contain object-center"
-                                loading="lazy"
-                            />
-                        </a>
-                    ))}
-                </div>
-            </div>
 
-            {/* Gradient Masks for Fade Effect */}
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-navy-900 to-transparent z-10 opacity-50 md:opacity-100"></div>
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-navy-900 to-transparent z-10 opacity-50 md:opacity-100"></div>
+                {/* Bottom Line: Left to Right with Phase Offset */}
+                <div className="relative flex overflow-x-hidden group">
+                    <div
+                        className="flex animate-marquee-reverse group-hover:[animation-play-state:paused] min-w-full shrink-0 items-center justify-start gap-16 md:gap-32 pr-16 md:pr-32"
+                        style={{ animationDelay: '-30s' }}
+                    >
+                        {brands.map((brand, index) => (
+                            <a
+                                key={`${brand.name}-b1-${index}`}
+                                href={brand.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="relative block w-48 h-48 md:w-64 md:h-64 transition-all duration-500 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]"
+                                aria-label={`Visit ${brand.name}`}
+                            >
+                                <img
+                                    src={brand.logo}
+                                    alt={brand.name}
+                                    className="w-full h-full object-contain object-center"
+                                    loading="lazy"
+                                />
+                            </a>
+                        ))}
+                    </div>
+                    {/* Duplicate for seamless loop */}
+                    <div
+                        aria-hidden="true"
+                        className="flex animate-marquee-reverse group-hover:[animation-play-state:paused] min-w-full shrink-0 items-center justify-start gap-16 md:gap-32 pr-16 md:pr-32"
+                        style={{ animationDelay: '-30s' }}
+                    >
+                        {brands.map((brand, index) => (
+                            <a
+                                key={`${brand.name}-b2-${index}`}
+                                href={brand.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="relative block w-48 h-48 md:w-64 md:h-64 transition-all duration-500 opacity-40 grayscale hover:grayscale-0 hover:opacity-100 hover:drop-shadow-[0_0_8px_rgba(255,255,255,0.4)]"
+                            >
+                                <img
+                                    src={brand.logo}
+                                    alt={brand.name}
+                                    className="w-full h-full object-contain object-center"
+                                    loading="lazy"
+                                />
+                            </a>
+                        ))}
+                    </div>
+                </div>
+
+                {/* Gradient Masks for Fade Effect */}
+                <div className="pointer-events-none absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-navy-900 to-transparent z-10 opacity-50 md:opacity-100"></div>
+                <div className="pointer-events-none absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-navy-900 to-transparent z-10 opacity-50 md:opacity-100"></div>
+            </div>
         </Section>
     )
 }
